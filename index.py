@@ -29,8 +29,7 @@ query_result = embeddings.embed_query("Hello world")
 import pinecone 
 from langchain.vectorstores import Pinecone
 pinecone.init(
-    api_key="pcsk_2Ko3NL_N2mJbxNfPVXi7ss19bhCfmDfzvNJS2YictnjkJNeL8jXJtWUBg1dh85q2V1EYMR",  # find at app.pinecone.io
-    environment="us-east-1"  # next to api key in console
+    api_key=""    environment="us-east-1"  # next to api key in console
 )
 index_name = "langchain-chatbot"
 index = Pinecone.from_documents(docs, embeddings, index_name=index_name)
