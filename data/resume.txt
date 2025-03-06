@@ -1,0 +1,21 @@
+Parth Patel
+ parth.patel0774@gmail.com 6479942477 https://www.linkedin.com/in/parth-patel-051a5b245/SUMMARY
+Always coding, always learning – because who needs sleep when you're solving problems? A solid foundation in Data Science, I specialize in machine learning, data analysis, and model deployment, leveraging tools like TensorFlow and Pandas. I’m committed to turning complex data into clear insights, fostering collaboration, and always striving for continuous improvement in every project I tackle.
+TECHNICAL SKILLS
+Python, C/C++, C#, JavaScript, R, SQL, NOSQL, Cloud Infrastructure(AWS,GCP),API Design, LangChain Framework, LlamaIndex, Linux, CI/CD, Git, Automation Anywhere, Docker, Kubernetes, Machine Learning, Scikit-learn, Transformers, Cuda, Keras, Agile Methodologies, Statistical Analysis, Supervised/Unsupervised learning, Regression, Neural Networks, Pytorch, TensorFlow, Dask, Hadoop, Spark, Hive, PowerBI, Tableau, AI AgentsPROFESSIONAL EXPERIENCE
+Junior AI Developer
+Ergocentric November 2024 – Present , Mississauga  Developed AI-driven computer vision models to analyze posture and extract accurate body measurements, reducing manual effort by 40%.
+ Optimized AI Algorithms: Implemented and fine-tuned machine learning models, improving measurement accuracy by 30%. Enhanced image processing pipelines, reducing analysis time by 50%, leading to faster and more efficient ergonomic assessments. AI-powered tools that integrate existing ergonomic evaluation systems, increasing data synchronization efficiency by 35%. Utilized OpenCV, TensorFlow, PyTorch to develop AI-driven computer vision models for pose estimation and automated measurement extraction.
+Junior Data Scientist
+Oakville Public Library October 2023 -October 2024, Oakville  Developed an advanced RAG-based chatbot using Hugging Face Transformers, LangChain, and PyTorch for intelligent, context-aware conversations.
+ Optimized large-scale data processing with TensorFlow and Apache Spark, reducing processing time by 40% and ensuring low-latency responses.  Enhanced query efficiency by implementing a Vector Database, improving similarity search performance by 40%.  Deployed scalable microservices with Docker and Kubernetes, ensuring 99.9% uptime and high availability.
+Junior Data Scientist Intern
+Bell Canada May 2024-August 2024, Toronto Automated network configuration using NetBox API, reducing manual workload by 40% and enhancing efficiency.  Optimized network performance with Pandas and NumPy, cutting troubleshooting time by 15% using AI-driven log analysis.  Implemented RPA workflows, reducing process completion time by 30% and minimizing manual errors.  Developed real-time dashboards and APIs, improving data navigation by 50% and enhancing system integration by 25%. Peer Mentor Team Lead
+Sheridan College (Part Time) January 2023 -January 2025 , Oakville Promoted to Team Lead from Peer Mentor for strong leadership, managing 20 mentors and facilitating sessions for 50+ students weekly.  Engaged in leadership and mentoring as a co-curricular role while being a student, balancing academics and team responsibilities effectively.
+EDUCATION
+Bachelor of Science (BSc), Data Science Jan 2022Sheridan College • Oakville • GPA 3.73
+CERTIFICATIONS AND ACHIEVEMENTS
+AWS Cloud Practitioner Certificate May 2024NVIDIA-Certified Associate Generative AI LLMs Currently Pursuing Sheridan’s Generator Student Award for Innovation in Research, 2024 October 2024 For the ”Generative AI for Library Frequently Asked Questions” Project
+PROJECTS
+ Conversational AI Call Agent integrated with Make Automation Tool and CRM| Python
+•AI Call Agent for a taxi company integrated with a CRM for real-time updates, record management and seamless modification capabilities.Credit Card Fraud Detection| Python •Designed and implemented a fraud detection system in R using ML Algorithms and ANN to classify transactions as genuine or fraudulent. Optimized models with feature engineering and hyperparameter tuning to improve accuracy and reduce false positives.
