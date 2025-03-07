@@ -1,66 +1,69 @@
-from langchain.chat_models import ChatOpenAI
-from langchain.chains import ConversationChain
-from langchain.chains.conversation.memory import ConversationBufferWindowMemory
-from langchain.prompts import (
-    SystemMessagePromptTemplate,
-    HumanMessagePromptTemplate,
-    ChatPromptTemplate,
-    MessagesPlaceholder
+import os
+import bs4
+import getpass
+from langchain import hub
+from dotenv import load_dotenv
+from langchain_community.vectorstores import Chroma
+from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+from langchain_core.messages import HumanMessage, SystemMessage
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_community.document_loaders import WebBaseLoader
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.runnables import RunnablePassthrough
+from langchain_core.prompts import PromptTemplate
+from langchain.schema import (
+    SystemMessage,
+    HumanMessage,
+    AIMessage
 )
-import streamlit as st
-from streamlit_chat import message
-from utils import *
 
-st.title("Personal AI Bot")
+def response(user_query):
 
-if 'responses' not in st.session_state:
-    st.session_state['responses'] = ["How can I assist you?"]
-
-if 'requests' not in st.session_state:
-    st.session_state['requests'] = []
-
-llm = ChatOpenAI(model_name="gpt-3.5-turbo", 
-openai_api_key="" ## find at platform.openai.com)
-
-if 'buffer_memory' not in st.session_state:
-            st.session_state.buffer_memory=ConversationBufferWindowMemory(k=3,return_messages=True)
+    # Load environment and get your openAI api key
+    load_dotenv()
+    openai_api_key = os.getenv("OPENAI_API_KEY")
 
 
-system_msg_template = SystemMessagePromptTemplate.from_template(template="""Answer the question as truthfully as possible using the provided context, 
-and if the answer is not contained within the text below, say 'I don't know'""")
+    # Select a webpage to load the context information from
+    loader = WebBaseLoader(
+        web_paths=("https://www.linkedin.com/pulse/insights-post-pandemic-economy-our-2024-global-market-rob-sharps-jcnmc/",),
+    )
+    docs = loader.load()
 
 
-human_msg_template = HumanMessagePromptTemplate.from_template(template="{input}")
-
-prompt_template = ChatPromptTemplate.from_messages([system_msg_template, MessagesPlaceholder(variable_name="history"), human_msg_template])
-
-conversation = ConversationChain(memory=st.session_state.buffer_memory, prompt=prompt_template, llm=llm, verbose=True)
-
-
-# container for chat history
-response_container = st.container()
-# container for text box
-textcontainer = st.container()
+    # Restructure to process the info in chunks
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
+    splits = text_splitter.split_documents(docs)
+    vectorstore = Chroma.from_documents(documents=splits, embedding=OpenAIEmbeddings())
 
 
-with textcontainer:
-    query = st.text_input("Query: ", key="input")
-    if query:
-        with st.spinner("typing..."):
-            conversation_string = get_conversation_string()
-            # st.code(conversation_string)
-            refined_query = query_refiner(conversation_string, query)
-            st.subheader("Refined Query:")
-            st.write(refined_query)
-            context = find_match(refined_query)
-            # print(context)  
-            response = conversation.predict(input=f"Context:\n {context} \n\n Query:\n{query}")
-        st.session_state.requests.append(query)
-        st.session_state.responses.append(response) 
-with response_container:
-    if st.session_state['responses']:
+    # Retrieve info from chosen source
+    retriever = vectorstore.as_retriever(search_type="similarity")
+    prompt = hub.pull("rlm/rag-prompt")
+    llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0, openai_api_key=openai_api_key)
 
-        for i in range(len(st.session_state['responses'])):
-            message(st.session_state['responses'][i],key=str(i))
-            if i < len(st.session_state['requests']):
-                message(st.session_state["requests"][i], is_user=True,key=str(i)+ '_user')
+    def format_docs(docs):
+        return "\n\n".join(doc.page_content for doc in docs)
+
+
+
+    template = """Use the following pieces of context to answer the question at the end.
+    Say that you don't know when asked a question you don't know, donot make up an answer. Be precise and concise in your answer.
+
+    {context}
+
+    Question: {question}
+
+    Helpful Answer:"""
+
+    # Add the context to your user query
+    custom_rag_prompt = PromptTemplate.from_template(template)
+
+    rag_chain = (
+        {"context": retriever | format_docs, "question": RunnablePassthrough()}
+        | custom_rag_prompt
+        | llm
+        | StrOutputParser()
+    )
+
+    return rag_chain.invoke(user_query) 
