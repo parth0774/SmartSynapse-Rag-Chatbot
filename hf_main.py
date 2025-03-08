@@ -5,7 +5,8 @@ from typing import List, Dict, Any
 import bs4
 from dotenv import load_dotenv
 from langchain_community.vectorstores import Chroma
-from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+from langchain_openai import ChatOpenAI
+from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import WebBaseLoader
@@ -64,11 +65,16 @@ class ChatbotService:
             splits = text_splitter.split_documents(docs)
             logger.info(f"Split documents into {len(splits)} chunks")
             
+            model_name = "sentence-transformers/all-mpnet-base-v2"  # or any other model
+            hf_embeddings = HuggingFaceEmbeddings(
+                model_name=model_name,
+                model_kwargs={'device': 'cpu'}  # or 'cuda' if you have GPU
+            )
             
             # Create vector store
             self.vectorstore = Chroma.from_documents(
                 documents=splits, 
-                embedding=OpenAIEmbeddings(openai_api_key=self.openai_api_key)
+                embedding=hf_embeddings
             )
             
             logger.info(f"Vector store initialized with {len(splits)} document chunks")
@@ -145,7 +151,7 @@ class ChatbotService:
             
             # Create the LLM
             llm = ChatOpenAI(
-                model_name="gpt-3.5-turbo", 
+                model_name="gpt-4o-mini", 
                 temperature=0.2, 
                 api_key=self.openai_api_key
             )
