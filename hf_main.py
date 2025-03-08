@@ -48,7 +48,7 @@ class ChatbotService:
         try:
             # Define default URLs for knowledge base
             default_urls = [
-                "https://www.linkedin.com/pulse/insights-post-pandemic-economy-our-2024-global-market-rob-sharps-jcnmc/"
+                "https://www.uipath.com/blog/ai/agentic-automation-reinventing-workflows"
             ]
             
             # Load documents from web
