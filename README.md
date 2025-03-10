@@ -156,10 +156,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 4. Push to the branch
 5. Open a Pull Request  
 
-## 📜 License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 <div align="center">
-  <p>Made with ❤️ by Your Name</p>
   <p>⭐ Star this repository if you found it useful! ⭐</p>
 </div>
