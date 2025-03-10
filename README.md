@@ -119,8 +119,8 @@ USER_AGENT=your_user_agent_string
 <div align="center">
   <table>
     <tr>
-      <td align="center"><img src="https://raw.githubusercontent.com/langchain-ai/langchain/master/docs/static/img/langchain_icon.svg" width="50px"/><br/><b>LangChain</b></td>
-      <td align="center"><img src="https://raw.githubusercontent.com/langchain-ai/langchain/master/docs/static/img/chainicon.png" width="50px"/><br/><b>OpenAI</b></td>
+      <td align="center"><img src="Images/langchain.svg" width="50px"/><br/><b>LangChain</b></td>
+      <td align="center"><img src="Images/openai.svg" width="50px"/><br/><b>OpenAI</b></td>
       <td align="center"><img src="https://huggingface.co/front/assets/huggingface_logo.svg" width="50px"/><br/><b>HuggingFace</b></td>
     </tr>
     <tr>
