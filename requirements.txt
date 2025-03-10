@@ -1,0 +1,44 @@
+# Core dependencies
+langchain==0.1.12
+langchain-community==0.0.19
+langchain-core==0.1.27
+langchain-openai==0.0.5
+langchain-huggingface==0.0.4
+openai>=1.3.0
+
+# Vector database
+chromadb>=0.4.18
+
+# Embedding models
+sentence-transformers>=2.2.2
+
+# Web scraping and document processing
+beautifulsoup4>=4.12.2
+lxml>=4.9.3
+requests>=2.31.0
+
+# Environment and configuration
+python-dotenv>=1.0.0
+
+# Data handling
+numpy>=1.24.0
+pandas>=2.0.0
+
+# Text processing
+nltk>=3.8.1
+spacy>=3.7.0
+transformers>=4.35.0
+
+# Web framework (if you have a web interface)
+flask>=2.3.0
+flask-cors>=4.0.0
+
+# Async support
+aiohttp>=3.8.5
+
+# Logging and monitoring
+rich>=13.3.5
+
+# Development tools
+pytest>=7.4.0
+black>=23.7.0
